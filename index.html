@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairos ご提案｜会員制Webサイト構築パートナーシップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1B2D;
+    --navy-light:#1C3049;
+    --navy-lighter:#2A4160;
+    --gold:#B8935A;
+    --gold-light:#D9BD8E;
+    --teal:#3C6E64;
+    --cream:#F3EFE6;
+    --ink:#24272B;
+    --paper:#FBF9F5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.85;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Shippori Mincho', serif;
+    letter-spacing:0.03em;
+  }
+  .eyebrow{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    color:var(--gold-light);
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(ellipse at 80% 15%, rgba(184,147,90,0.14), transparent 55%),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 55%, var(--navy) 100%);
+    color:var(--cream);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:120px 0 90px;
+    overflow:hidden;
+  }
+  .keyhole{
+    position:absolute;
+    top:50%;
+    right:-60px;
+    transform:translateY(-50%);
+    width:340px;
+    height:340px;
+    opacity:0.9;
+    z-index:0;
+  }
+  .keyhole .circle{
+    position:absolute;
+    top:0; left:60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(217,189,142,0.5), rgba(184,147,90,0.05) 70%);
+    border:1px solid rgba(217,189,142,0.35);
+  }
+  .keyhole .stem{
+    position:absolute;
+    top:150px; left:145px;
+    width:0; height:0;
+    border-left:26px solid transparent;
+    border-right:26px solid transparent;
+    border-top:120px solid rgba(184,147,90,0.18);
+  }
+  .keyhole .stem::after{
+    content:'';
+    position:absolute;
+    top:-120px; left:-26px;
+    width:52px; height:52px;
+    border:1px solid rgba(217,189,142,0.35);
+    border-top:none; border-left:none;
+    opacity:0;
+  }
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    max-width:660px;
+  }
+  .hero .eyebrow{margin-bottom:22px; display:block;}
+  .hero h1{
+    font-size:clamp(2.1rem, 4.6vw, 3.1rem);
+    font-weight:700;
+    line-height:1.65;
+    margin-bottom:28px;
+  }
+  .hero h1 .accent{color:var(--gold-light);}
+  .hero p.lead{
+    font-size:1.02rem;
+    color:#D8D5CC;
+    max-width:540px;
+    margin-bottom:36px;
+  }
+  .hero .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid rgba(217,189,142,0.4);
+    padding:10px 20px;
+    border-radius:999px;
+    font-size:0.85rem;
+    color:var(--gold-light);
+    margin-bottom:34px;
+  }
+  .hero .badge::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:var(--gold-light);
+    box-shadow:0 0 8px var(--gold-light);
+  }
+  .btn{
+    display:inline-block;
+    padding:16px 36px;
+    background:var(--gold);
+    color:var(--navy);
+    text-decoration:none;
+    font-weight:700;
+    border-radius:2px;
+    letter-spacing:0.05em;
+    transition:transform .25s ease, box-shadow .25s ease;
+    box-shadow:0 8px 24px rgba(184,147,90,0.25);
+  }
+  .btn:hover{transform:translateY(-3px); box-shadow:0 12px 30px rgba(184,147,90,0.35);}
+  .btn.ghost{
+    background:transparent;
+    color:var(--cream);
+    border:1px solid rgba(243,239,230,0.4);
+    box-shadow:none;
+    margin-left:14px;
+  }
+
+  /* ===== SECTION COMMON ===== */
+  section{padding:110px 0;}
+  .sec-head{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 64px;
+  }
+  .sec-head .eyebrow{color:var(--teal); display:block; margin-bottom:14px;}
+  .sec-head h2{
+    font-size:clamp(1.5rem, 3vw, 2.1rem);
+    color:var(--navy);
+    line-height:1.6;
+  }
+  .sec-head p{
+    margin-top:18px;
+    color:#5a5a55;
+    font-size:0.95rem;
+  }
+
+  /* ===== UNDERSTANDING ===== */
+  .understand{background:var(--cream);}
+  .u-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:26px;
+  }
+  .u-card{
+    background:var(--paper);
+    border:1px solid #E4DFD1;
+    border-left:4px solid var(--teal);
+    padding:32px 28px;
+    position:relative;
+  }
+  .u-card .num{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:2rem;
+    color:var(--gold);
+    display:block;
+    margin-bottom:10px;
+  }
+  .u-card h3{
+    font-size:1.05rem;
+    color:var(--navy);
+    margin-bottom:12px;
+  }
+  .u-card p{
+    font-size:0.9rem;
+    color:#565650;
+  }
+
+  /* ===== VALUE ===== */
+  .value{background:var(--paper);}
+  .v-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:28px;
+  }
+  .v-card{
+    background:var(--navy);
+    color:var(--cream);
+    padding:38px 30px;
+    position:relative;
+    overflow:hidden;
+    border-radius:2px;
+  }
+  .v-card::before{
+    content:'';
+    position:absolute;
+    top:-40px; right:-40px;
+    width:120px; height:120px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(184,147,90,0.25), transparent 70%);
+  }
+  .v-card .mark{
+    display:inline-block;
+    width:38px; height:38px;
+    border:1px solid var(--gold-light);
+    border-radius:50%;
+    position:relative;
+    margin-bottom:22px;
+  }
+  .v-card .mark::after{
+    content:'';
+    position:absolute;
+    top:50%; left:50%;
+    width:6px; height:6px;
+    background:var(--gold-light);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+  }
+  .v-card h3{
+    font-size:1.08rem;
+    margin-bottom:14px;
+    color:var(--gold-light);
+  }
+  .v-card p{
+    font-size:0.9rem;
+    color:#CFCBC0;
+  }
+  .v-card.wide{grid-column:span 1;}
+
+  /* ===== PROCESS ===== */
+  .process{background:var(--navy-light); color:var(--cream);}
+  .process .sec-head h2{color:var(--cream);}
+  .process .sec-head p{color:#C9C6BC;}
+  .timeline{
+    position:relative;
+    max-width:760px;
+    margin:0 auto;
+    padding-left:36px;
+    border-left:1px solid rgba(217,189,142,0.35);
+  }
+  .t-item{
+    position:relative;
+    padding:0 0 46px 30px;
+  }
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:attr(data-n);
+    position:absolute;
+    left:-48px;
+    top:0;
+    width:34px; height:34px;
+    background:var(--gold);
+    color:var(--navy);
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:1rem;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .t-item h3{
+    font-family:'Shippori Mincho', serif;
+    font-size:1.08rem;
+    margin-bottom:10px;
+    color:var(--gold-light);
+  }
+  .t-item p{
+    font-size:0.9rem;
+    color:#D3D0C6;
+    max-width:560px;
+  }
+
+  /* ===== ANSWERS ===== */
+  .answers{background:var(--cream);}
+  .a-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:18px;
+  }
+  .a-item{
+    background:var(--paper);
+    border:1px solid #E4DFD1;
+    padding:22px 24px;
+    font-size:0.88rem;
+  }
+  .a-item b{
+    display:block;
+    color:var(--navy);
+    font-family:'Shippori Mincho', serif;
+    font-size:0.95rem;
+    margin-bottom:8px;
+  }
+
+  /* ===== CLOSING ===== */
+  .closing{
+    position:relative;
+    background:linear-gradient(160deg, var(--navy) 0%, #142238 100%);
+    color:var(--cream);
+    text-align:center;
+    padding:130px 0;
+    overflow:hidden;
+  }
+  .closing .keyhole{
+    right:auto; left:50%;
+    top:14%;
+    transform:translateX(-50%);
+    opacity:0.5;
+  }
+  .closing-inner{position:relative; z-index:1;}
+  .closing .eyebrow{display:block; margin-bottom:18px;}
+  .closing h2{
+    font-size:clamp(1.6rem,3.6vw,2.4rem);
+    line-height:1.7;
+    margin-bottom:22px;
+  }
+  .closing p{
+    color:#D3D0C6;
+    max-width:520px;
+    margin:0 auto 42px;
+    font-size:0.95rem;
+  }
+  .cta-row{display:flex; justify-content:center; flex-wrap:wrap; gap:14px;}
+
+  footer{
+    background:var(--navy);
+    color:#8F8C82;
+    text-align:center;
+    padding:26px 0;
+    font-size:0.78rem;
+    letter-spacing:0.05em;
+  }
+  footer .brand{color:var(--gold-light); font-family:'Cormorant Garamond', serif; font-style:italic;}
+
+  @media (max-width:640px){
+    .hero{padding:100px 0 70px;}
+    .keyhole{width:220px; height:220px; opacity:0.4; right:-90px;}
+    section{padding:80px 0;}
+    .btn.ghost{margin-left:0; margin-top:12px; display:block; text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="keyhole"><div class="circle"></div><div class="stem"></div></div>
+  <div class="wrap hero-inner">
+    <span class="badge">Kairos からのご提案 ｜ Web制作・システム開発</span>
+    <span class="eyebrow">Proposal for (株)スマートマッチング様</span>
+    <h1>詳細を明かせない段階から、<br>信頼できる仕事は始められる。<br><span class="accent">Kairos は、その扉を叶える鍵になります。</span></h1>
+    <p class="lead">
+      業種も商品名もまだ伏せられている——それでも会員制サイトという「仕組み」の設計・実装・運用については、
+      今できる提案があります。Kairosは、貴社が窓口となる本件において、実作業を担う制作パートナーとしてご協力いたします。
+    </p>
+    <a href="#closing" class="btn">概算・体制のご相談へ</a>
+    <a href="#value" class="btn ghost">できることを見る</a>
+  </div>
+</section>
+
+<section class="understand">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Understanding</span>
+      <h2>この募集を、私たちはこう理解しています</h2>
+      <p>要件が固まる前の「体制判断」の段階であること。守秘義務があること。費用の切り分けが必要なこと。
+        そのすべてを踏まえたうえで、まず率直にお伝えしたいと思います。</p>
+    </div>
+    <div class="u-grid">
+      <div class="u-card">
+        <span class="num">01</span>
+        <h3>詳細より先に「任せられるか」を見ている</h3>
+        <p>業種・商品が明かせない今、判断材料は技術力・実績・費用感・対応範囲の透明性です。まずはその判断に足る情報を、率直な言葉でご提示します。</p>
+      </div>
+      <div class="u-card">
+        <span class="num">02</span>
+        <h3>会員ゲートが、この案件の技術的な核心</h3>
+        <p>公開ページと会員限定ページの出し分け、承認フロー、将来的な条件判定まで見据えた設計が必要な案件だと理解しています。単なる「会員機能付きサイト」ではありません。</p>
+      </div>
+      <div class="u-card">
+        <span class="num">03</span>
+        <h3>制作費とSEO・広告費は、別会計で考えたい</h3>
+        <p>本体構築の概算と、SEO・アクセス解析・広告運用の費用感を分けてご提示すること自体を、貴社の判断材料の一部として重視されていると受け止めています。</p>
+      </div>
+      <div class="u-card">
+        <span class="num">04</span>
+        <h3>一度きりでなく、継続を前提にした関係を探している</h3>
+        <p>今回の成果次第で、今後のWeb制作案件も相談したいというご意向を理解しています。だからこそ最初の一件を、次につながる形で仕上げたいと考えています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="value" id="value">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What We Bring</span>
+      <h2>Kairos が提供できる価値</h2>
+      <p>すべてに対応できる万能さより、対応できる範囲を正確に伝える誠実さを大事にしています。</p>
+    </div>
+    <div class="v-grid">
+      <div class="v-card">
+        <span class="mark"></span>
+        <h3>会員制サイトの設計・実装力</h3>
+        <p>会員登録・ログイン・限定コンテンツ表示・管理画面での記事編集まで、要件の複雑さに応じてWordPress／他CMS／独自開発を使い分けてご提案します。構築方法の選定理由も明確にお伝えします。</p>
+      </div>
+      <div class="v-card">
+        <span class="mark"></span>
+        <h3>SEO・分析・広告運用の伴走</h3>
+        <p>内部SEO・技術SEO、GA4／Search Console／GTMの設定、Google広告・Meta広告の運用まで対応可能です。制作費とは別建てで、料金体系を明確にしてご提示します。</p>
+      </div>
+      <div class="v-card">
+        <span class="mark"></span>
+        <h3>窓口を通した円滑な進行</h3>
+        <p>貴社がクライアント窓口・進行管理を担う体制を前提に、実務側の報告・相談のフローを整えます。直接打ち合わせが必要な場面も、事前調整のうえ柔軟に対応します。</p>
+      </div>
+      <div class="v-card">
+        <span class="mark"></span>
+        <h3>本人稼働・実績の透明性</h3>
+        <p>実作業は本人が担当し、再委託する工程がある場合は事前に明示します。類似する会員制サイトの制作実績、修正回数や保証期間についても、応募時点で具体的にお答えします。</p>
+      </div>
+      <div class="v-card">
+        <span class="mark"></span>
+        <h3>公開後の保守・改善サイクル</h3>
+        <p>公開して終わりにせず、月次レポートと数値に基づく改善提案までを見据えたご提案が可能です。保守費用・対応外の作業も併せて明確にします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How We Proceed</span>
+      <h2>進め方とスケジュールイメージ</h2>
+      <p>要件が未確定な現段階に合わせ、まずは概算と体制のすり合わせから始めます。</p>
+    </div>
+    <div class="timeline">
+      <div class="t-item" data-n="1">
+        <h3>ヒアリング・秘密保持の確認</h3>
+        <p>公開可能な範囲の情報をもとに、構築方針の方向性と概算の前提条件をすり合わせます。</p>
+      </div>
+      <div class="t-item" data-n="2">
+        <h3>構築方法・ページ構成・概算のご提示</h3>
+        <p>WordPress／他CMS／独自開発の推奨とその理由、想定ページ構成、基本部分の概算費用、対応可否の一覧をお出しします。</p>
+      </div>
+      <div class="t-item" data-n="3">
+        <h3>要件確定・役割分担の合意</h3>
+        <p>作業範囲・金額・納期を正式に取り交わし、既存ドメイン・サーバーの調査もこの段階で実施します。</p>
+      </div>
+      <div class="t-item" data-n="4">
+        <h3>設計・デザイン</h3>
+        <p>公開ページ・会員限定ページ・管理画面の構成と画面設計を固めます。スマートフォン対応を前提に設計します。</p>
+      </div>
+      <div class="t-item" data-n="5">
+        <h3>実装・会員機能構築</h3>
+        <p>認証まわり、記事投稿・編集機能、基本的なSEO・アクセス解析・セキュリティ対策を組み込みます。</p>
+      </div>
+      <div class="t-item" data-n="6">
+        <h3>検収・公開・初期設定</h3>
+        <p>貴社での確認・検収を経て公開。ドメイン・サーバーの初期設定まで対応します。</p>
+      </div>
+      <div class="t-item" data-n="7">
+        <h3>保守・SEO / 広告運用（継続）</h3>
+        <p>公開後の保守、会員承認フローや決済などの追加検討機能、月次レポートによる改善提案へと続けます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="answers">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Direct Answers</span>
+      <h2>ご質問13項目への、率直な方向性</h2>
+      <p>正式な数値・実績は、応募後に詳細情報を共有いただいた上で確定してご提示します。</p>
+    </div>
+    <div class="a-grid">
+      <div class="a-item"><b>構築方法</b>要件次第でWordPress／他CMSを比較検討し、理由とともに提案します。</div>
+      <div class="a-item"><b>概算費用</b>ページ構成・機能範囲を確認のうえ、含む作業を明記して提示します。</div>
+      <div class="a-item"><b>追加機能</b>会員承認・メール配信・決済・チャットボットは個別に対応可否と費用を分けて回答します。</div>
+      <div class="a-item"><b>対応範囲</b>サイト全体・工程限定のいずれも可能。得意領域を明示した上でご相談します。</div>
+      <div class="a-item"><b>期間・着手</b>要件確定後の目安期間と、直近の着手可能時期を初回提案時にお伝えします。</div>
+      <div class="a-item"><b>実績</b>会員制サイト・CMS構築の類似実績を、守秘に配慮した形で共有します。</div>
+      <div class="a-item"><b>保証・保守</b>修正回数、公開後の保証期間、保守費用を見積書に明記します。</div>
+      <div class="a-item"><b>見積外の作業</b>含まれない作業は事前に一覧化し、認識のズレを防ぎます。</div>
+      <div class="a-item"><b>既存環境調査</b>既存ドメイン・サーバーの調査、公開作業まで対応可能です。</div>
+      <div class="a-item"><b>継続相談</b>継続的なご相談を歓迎します。連絡可能時間帯と返信目安も明示します。</div>
+      <div class="a-item"><b>SEO対応範囲</b>内部SEO・技術SEO・GA4／GTM設定を中心に、具体的な経験とともに回答します。</div>
+      <div class="a-item"><b>広告運用</b>対応媒体・料金体系・実績を制作費と切り分けてご提示します。</div>
+      <div class="a-item"><b>再委託の有無</b>本人稼働を基本とし、再委託が発生する場合は必ず事前に明示します。</div>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="closing">
+  <div class="keyhole"><div class="circle"></div><div class="stem"></div></div>
+  <div class="wrap closing-inner">
+    <span class="eyebrow">Next Step</span>
+    <h2>扉を開ける前に、<br>鍵の形を確かめておきませんか。</h2>
+    <p>
+      まだ詳細を伺えない段階だからこそ、まずは技術・実績・概算のすり合わせから。
+      Kairosは、貴社が求める「実作業を担える協力者」として、率直にお応えします。
+    </p>
+    <div class="cta-row">
+      <a href="mailto:contact@kairos-studio.example" class="btn">概算相談を申し込む</a>
+      <a href="#value" class="btn ghost">提供価値をもう一度見る</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="brand">Kairos</span> — Web制作・システム開発チーム ｜ 本提案は (株)スマートマッチング様の募集内容に基づき作成しています
+</footer>
+
+</body>
+</html>
